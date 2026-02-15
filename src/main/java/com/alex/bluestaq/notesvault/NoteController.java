@@ -3,45 +3,41 @@ package com.alex.bluestaq.notesvault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import com.alex.bluestaq.notesvault.dao.Note;
+
 import java.util.List;
 
-import org.springframework.web.server.ResponseStatusException;
-
 @RestController
-@RequestMapping("api/notes")
+@RequestMapping("/notes")
 public class NoteController {
     
-    private final NoteRepository repo;
+    private final NoteService service;
 
-    record CreateNoteRequest(String text) {}
-
-    public NoteController(NoteRepository repo) {
-        this.repo = repo;
+    public NoteController(NoteService service) {
+        this.service = service;
     }
+    
+    public record CreateNoteRequest(String text) {}
 
     @GetMapping
     public List<Note> getAllNotes() {
-        return repo.findAll();
+        return service.findAll();
     }
 
     @GetMapping("/{id}")
     public Note getNoteById(@PathVariable Long id) {
-        return repo.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Note not found"));
+        return service.findById(id);
     }
     
     @PostMapping()
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.CREATED)
     public Note createNote(@RequestBody CreateNoteRequest req) {
-        return repo.save(new Note(req.text));
+        return service.create(req.text());
     }
     
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteNote(@PathVariable Long id) {
-        if (!repo.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Note not found");
-        }
-        repo.deleteById(id);
+        service.deleteById(id);
     }
 }

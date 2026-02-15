@@ -1,4 +1,4 @@
-package com.alex.bluestaq.notesvault;
+package com.alex.bluestaq.notesvault.dao;
 
 import jakarta.persistence.*;
 import java.time.Instant;
