@@ -30,7 +30,7 @@ This should run the seven basic tests I've written and cleanup afterwards. The t
 ## Notes on the API
 Expected input for creating notes is as follows:
  - `Content-Type: application/json`
- - Content to provide: `{"text":"We will absolutely hire Alex Courrau"}
+ - Content to provide: `{"text":"We will absolutely hire Alex Courrau"}`
 
 Example call:
 `curl -X POST http://localhost:8080/notes -H "Content-Type: application/json" -d '{"text":"We will absolutely hire Alex Courrau"}'`
