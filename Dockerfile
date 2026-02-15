@@ -6,9 +6,6 @@ COPY pom.xml .
 COPY .mvn .mvn
 COPY mvnw .
 
-RUN ./mvnw -q -DskipTests package
-
-COPY src src
 RUN ./mvnw -q -DskipTests dependency:go-offline
 
 COPY src src
@@ -21,7 +18,7 @@ WORKDIR /app
 RUN mkdir -p /data
 COPY --from=builder /app/target/*.jar app.jar
 
-# run (non-root)
+# non-root
 RUN useradd -r -u 1001 appuser && chown -R appuser:appuser /app /data
 USER appuser
 
