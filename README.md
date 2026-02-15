@@ -9,13 +9,6 @@ The API I've built exposes four endpoints:
 
 It's built to run in a Docker Container and has two targets: the main API run and a test target for some small unit tests.
 
-## Tech overview
- - Spring Boot 4
- - Spring JPA / Hibernate
- - Java 21
- - SQLite DB
- - JUnit
-
 ## How to Run
 
 ### API
@@ -53,6 +46,13 @@ Keeping `NoteRepository` separate is a design decision that's planning for the f
 
 Error messages are intentionally simple for predictability.
 
+## Tech overview
+ - Spring Boot 4
+ - Spring JPA / Hibernate
+ - Java 21
+ - SQLite DB
+ - JUnit
+
 ## Improvements
 Overall a higher level of validation would be a great step forward in the overall polish of the app. Providing better feedback in the response would make it easier to use. 
 
@@ -60,3 +60,4 @@ Adding other functionality would be useful:
  - `PUT` endpoints for updating a note
  - Additional tables allowing a user being tied to a specific note.
  - Additional tables to add more metadata about the note, such as a category or type of note.
+ - More search capabilites.
