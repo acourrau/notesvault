@@ -15,11 +15,11 @@ public class NoteService {
     public NoteService(NoteRepository repo) { this.repo = repo; }
 
     public Note create(String text) {
-        if (text.length() > 500) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Text is too long. Maximum 500 characters.");
-        }
         if (text == null || text.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Text cannot be empty.");
+        }
+        if (text.length() > 500) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Text is too long. Maximum 500 characters.");
         }
 
         return repo.save(new Note(text));
